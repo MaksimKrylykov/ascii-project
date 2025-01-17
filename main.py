@@ -1,4 +1,5 @@
 import sys
+import argparse
 
 FIRST_SYMBOL = ' '
 LAST_SYMBOL = '~'
@@ -19,7 +20,7 @@ def fix_str(string):
     return fixed_str
 
 
-def ascii_art(text, banner = "standard"):
+def get_ascii_art(text, banner = "standard"):
     try:
         banner_file = open(f"./banners/{banner}.txt")
     except:
@@ -66,16 +67,32 @@ def ascii_art(text, banner = "standard"):
 if __name__ == '__main__':
     
     if len(sys.argv) > 1:
-        input_text = sys.argv[1].strip()
+
+        args = sys.argv
+
+        output_file = ''
+        for i in range(1, len(args)):
+            if args[i].strip()[0:8] == "--output":
+                output_file = args[i].strip()[9:]
+                del args[i]
+                break
+
+        input_text = args[1].strip()
 
         try:
-            banner = sys.argv[2].strip()
+            banner = args[2].strip()
         except:
             banner = "standard"
 
         fixed_text = fix_str(input_text)
-        
-        print(ascii_art(fixed_text, banner), end='')
+
+        ascii_art = get_ascii_art(fixed_text, banner)
+
+        if output_file == '':
+            print(ascii_art, end='')
+        else:
+            with open(output_file, 'w') as file:
+                file.write(ascii_art)
         
     else:
         print("Usage: python3 main.py [STRING] [BANNER]")
