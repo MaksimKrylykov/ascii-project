@@ -19,13 +19,13 @@ def fix_str(string):
     return fixed_str
 
 
-def ascii_art(text, font = "standard"):
+def ascii_art(text, banner = "standard"):
     try:
-        font_file = open(f"./fonts/{font}.txt")
+        banner_file = open(f"./banners/{banner}.txt")
     except:
-        font_file = open("./fonts/standard.txt")
+        banner_file = open("./banners/standard.txt")
         
-    lines = font_file.readlines()
+    lines = banner_file.readlines()
     
     ascii_map = dict()
     current_line = 1
@@ -69,10 +69,16 @@ if __name__ == '__main__':
         input_text = sys.argv[1].strip()
 
         try:
-            font = sys.argv[2].strip()
+            banner = sys.argv[2].strip()
         except:
-            font = "standard"
+            banner = "standard"
 
         fixed_text = fix_str(input_text)
         
-        print(ascii_art(fixed_text, font), end='')
+        print(ascii_art(fixed_text, banner), end='')
+        
+    else:
+        print("Usage: python3 main.py [STRING] [BANNER]")
+        print()
+        print("EX: python3 main.py something standard")
+    
