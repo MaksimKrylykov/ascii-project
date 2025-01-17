@@ -2,7 +2,6 @@ import sys
 
 FIRST_SYMBOL = ' '
 LAST_SYMBOL = '~'
-
 CHAR_HEIGHT = 8
 
 
@@ -20,8 +19,12 @@ def fix_str(string):
     return fixed_str
 
 
-def ascii_art(text):
-    font_file = open("./fonts/standard.txt")
+def ascii_art(text, font = "standard"):
+    try:
+        font_file = open(f"./fonts/{font}.txt")
+    except:
+        font_file = open("./fonts/standard.txt")
+        
     lines = font_file.readlines()
     
     ascii_map = dict()
@@ -65,6 +68,11 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         input_text = sys.argv[1].strip()
 
+        try:
+            font = sys.argv[2].strip()
+        except:
+            font = "standard"
+
         fixed_text = fix_str(input_text)
         
-        print(ascii_art(fixed_text), end='')
+        print(ascii_art(fixed_text, font), end='')
