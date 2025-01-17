@@ -67,7 +67,6 @@ def get_ascii_art(text, banner = "standard"):
 if __name__ == '__main__':
     
     if len(sys.argv) > 1:
-
         args = sys.argv
 
         output_file = ''
@@ -95,7 +94,7 @@ if __name__ == '__main__':
                 file.write(ascii_art)
         
     else:
-        print("Usage: python3 main.py [STRING] [BANNER]")
+        print("Usage: python3 main.py [OPTION] [STRING] [BANNER]")
         print()
-        print("EX: python3 main.py something standard")
+        print("Example: python3 main.py --output=<fileName.txt> something standard")
     
