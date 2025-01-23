@@ -21,6 +21,8 @@ def fix_str(string):
 
 
 def get_ascii_art(text, banner = "standard"):
+    text = fix_str(text)
+    
     try:
         banner_file = open(f"./banners/{banner}.txt")
     except:
@@ -83,9 +85,7 @@ if __name__ == '__main__':
         except:
             banner = "standard"
 
-        fixed_text = fix_str(input_text)
-
-        ascii_art = get_ascii_art(fixed_text, banner)
+        ascii_art = get_ascii_art(input_text, banner)
 
         if output_file == '':
             print(ascii_art, end='')
